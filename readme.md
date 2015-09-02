@@ -2,6 +2,8 @@
 
 > Stringify and write JSON to a file [atomically](https://github.com/iarna/write-file-atomic)
 
+Creates directories as needed for you.
+
 
 ## Install
 

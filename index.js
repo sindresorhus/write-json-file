@@ -1,7 +1,10 @@
 'use strict';
+var path = require('path');
+var fs = require('graceful-fs');
 var writeFileAtomic = require('write-file-atomic');
 var sortKeys = require('sort-keys');
 var objectAssign = require('object-assign');
+var mkdirp = require('mkdirp');
 var Promise = require('pinkie-promise');
 var pify = require('pify');
 
@@ -23,5 +26,13 @@ function main(fn, fp, data, opts) {
 	return fn(fp, json, {mode: opts.mode});
 }
 
-module.exports = main.bind(null, pify(writeFileAtomic, Promise));
-module.exports.sync = main.bind(null, writeFileAtomic.sync);
+module.exports = function (fp, data, opts) {
+	return pify(mkdirp, Promise)(path.dirname(fp), {fs: fs}).then(function () {
+		return main(pify(writeFileAtomic, Promise), fp, data, opts);
+	});
+};
+
+module.exports.sync = function (fp, data, opts) {
+	mkdirp.sync(path.dirname(fp), {fs: fs});
+	main(writeFileAtomic.sync, fp, data, opts);
+};
