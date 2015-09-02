@@ -9,6 +9,14 @@ var Promise = require('pinkie-promise');
 var pify = require('pify');
 
 function main(fn, fp, data, opts) {
+	if (!fp) {
+		throw new TypeError('Expected a filepath');
+	}
+
+	if (data === undefined) {
+		throw new TypeError('Expected data to stringify');
+	}
+
 	opts = objectAssign({
 		indent: '\t',
 		sortKeys: false
