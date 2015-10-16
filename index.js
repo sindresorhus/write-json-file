@@ -1,4 +1,5 @@
 'use strict';
+var os = require('os');
 var path = require('path');
 var fs = require('graceful-fs');
 var writeFileAtomic = require('write-file-atomic');
@@ -29,7 +30,7 @@ function main(fn, fp, data, opts) {
 		});
 	}
 
-	var json = JSON.stringify(data, opts.replacer, opts.indent) + '\n';
+	var json = JSON.stringify(data, opts.replacer, opts.indent) + os.EOL;
 
 	return fn(fp, json, {mode: opts.mode});
 }
