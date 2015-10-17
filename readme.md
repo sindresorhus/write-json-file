@@ -15,9 +15,9 @@ $ npm install --save write-json-file
 ## Usage
 
 ```js
-var writeJsonFile = require('write-json-file');
+const writeJsonFile = require('write-json-file');
 
-writeJsonFile('foo.json', {foo: true}).then(function () {
+writeJsonFile('foo.json', {foo: true}).then(() => {
 	console.log('done');
 });
 ```
