@@ -1,14 +1,12 @@
 'use strict';
-var path = require('path');
-var fs = require('graceful-fs');
-var writeFileAtomic = require('write-file-atomic');
-var sortKeys = require('sort-keys');
-var objectAssign = require('object-assign');
-var mkdirp = require('mkdirp');
-var Promise = require('pinkie-promise');
-var pify = require('pify');
+const path = require('path');
+const fs = require('graceful-fs');
+const writeFileAtomic = require('write-file-atomic');
+const sortKeys = require('sort-keys');
+const mkdirp = require('mkdirp');
+const pify = require('pify');
 
-function main(fn, fp, data, opts) {
+const main = (fn, fp, data, opts) => {
 	if (!fp) {
 		throw new TypeError('Expected a filepath');
 	}
@@ -17,7 +15,7 @@ function main(fn, fp, data, opts) {
 		throw new TypeError('Expected data to stringify');
 	}
 
-	opts = objectAssign({
+	opts = Object.assign({
 		indent: '\t',
 		sortKeys: false
 	}, opts);
@@ -29,18 +27,18 @@ function main(fn, fp, data, opts) {
 		});
 	}
 
-	var json = JSON.stringify(data, opts.replacer, opts.indent) + '\n';
+	const json = JSON.stringify(data, opts.replacer, opts.indent);
 
-	return fn(fp, json, {mode: opts.mode});
-}
+	return fn(fp, `${json}\n`, {mode: opts.mode});
+};
 
-module.exports = function (fp, data, opts) {
-	return pify(mkdirp, Promise)(path.dirname(fp), {fs: fs}).then(function () {
-		return main(pify(writeFileAtomic, Promise), fp, data, opts);
+module.exports = (fp, data, opts) => {
+	return pify(mkdirp)(path.dirname(fp), {fs}).then(() => {
+		return main(pify(writeFileAtomic), fp, data, opts);
 	});
 };
 
-module.exports.sync = function (fp, data, opts) {
-	mkdirp.sync(path.dirname(fp), {fs: fs});
+module.exports.sync = (fp, data, opts) => {
+	mkdirp.sync(path.dirname(fp), {fs});
 	main(writeFileAtomic.sync, fp, data, opts);
 };
