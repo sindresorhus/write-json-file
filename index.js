@@ -32,11 +32,9 @@ const main = (fn, fp, data, opts) => {
 	return fn(fp, `${json}\n`, {mode: opts.mode});
 };
 
-module.exports = (fp, data, opts) => {
-	return pify(mkdirp)(path.dirname(fp), {fs}).then(() => {
-		return main(pify(writeFileAtomic), fp, data, opts);
-	});
-};
+module.exports = (fp, data, opts) =>
+	pify(mkdirp)(path.dirname(fp), {fs})
+		.then(() => main(pify(writeFileAtomic), fp, data, opts));
 
 module.exports.sync = (fp, data, opts) => {
 	mkdirp.sync(path.dirname(fp), {fs});

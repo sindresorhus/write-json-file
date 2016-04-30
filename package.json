@@ -19,8 +19,8 @@
     "index.js"
   ],
   "keywords": [
-    "json",
     "write",
+    "json",
     "stringify",
     "file",
     "fs",

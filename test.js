@@ -2,16 +2,16 @@ import path from 'path';
 import fs from 'fs';
 import test from 'ava';
 import tempfile from 'tempfile';
-import fn from './';
+import m from './';
 
 test('async', async t => {
 	const tmp = path.join(tempfile(), 'foo');
-	await fn(tmp, {foo: true}, {indent: 2});
+	await m(tmp, {foo: true}, {indent: 2});
 	t.is(fs.readFileSync(tmp, 'utf8'), '{\n  "foo": true\n}\n');
 });
 
 test('sync', t => {
 	const tmp = path.join(tempfile(), 'foo');
-	fn.sync(tmp, {foo: true}, {indent: 2});
+	m.sync(tmp, {foo: true}, {indent: 2});
 	t.is(fs.readFileSync(tmp, 'utf8'), '{\n  "foo": true\n}\n');
 });
