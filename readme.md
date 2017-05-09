@@ -66,6 +66,7 @@ Default `438` *(0666 in octal)*
 ## Related
 
 - [load-json-file](https://github.com/sindresorhus/load-json-file) - Read and parse a JSON file
+- [make-dir](https://github.com/sindresorhus/make-dir) - Make a directory and its parents if needed
 
 
 ## License
