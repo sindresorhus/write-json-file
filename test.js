@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import test from 'ava';
 import tempfile from 'tempfile';
-import m from './';
+import m from '.';
 
 test('async', async t => {
 	const tmp = path.join(tempfile(), 'foo');

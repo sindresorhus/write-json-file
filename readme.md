@@ -1,6 +1,6 @@
 # write-json-file [![Build Status](https://travis-ci.org/sindresorhus/write-json-file.svg?branch=master)](https://travis-ci.org/sindresorhus/write-json-file)
 
-> Stringify and write JSON to a file [atomically](https://github.com/iarna/write-file-atomic)
+> Stringify and write JSON to a file [atomically](https://github.com/npm/write-file-atomic)
 
 Creates directories for you as needed.
 
@@ -27,26 +27,28 @@ writeJsonFile('foo.json', {foo: true}).then(() => {
 
 ### writeJsonFile(filepath, data, [options])
 
-Returns a promise.
+Returns a `Promise`.
 
 ### writeJsonFile.sync(filepath, data, [options])
 
 #### options
 
+Type: `Object`
+
 ##### indent
 
-Type: `string`, `number`  
+Type: `string` `number`<br>
 Default: `\t`
 
-Indentation as a string or number of spaces.  
+Indentation as a string or number of spaces.<br>
 Pass in `null` for no formatting.
 
 ##### sortKeys
 
-Type: `boolean`, `function`  
+Type: `boolean` `function`<br>
 Default: `false`
 
-Sort the keys recursively.  
+Sort the keys recursively.<br>
 Optionally pass in a [`compare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) function.
 
 ##### replacer
@@ -57,8 +59,8 @@ Passed into [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/Java
 
 ##### mode
 
-Type: `number`  
-Default `438` *(0666 in octal)*
+Type: `number`<br>
+Default: `0o666`
 
 [Mode](https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation) used when writing the file.
 
@@ -71,4 +73,4 @@ Default `438` *(0666 in octal)*
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)
