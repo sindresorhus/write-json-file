@@ -5,8 +5,10 @@ const writeFileAtomic = require('write-file-atomic');
 const sortKeys = require('sort-keys');
 const makeDir = require('make-dir');
 const pify = require('pify');
+const detectIndent = require('detect-indent');
+const pathExists = require('path-exists');
 
-const main = (fn, fp, data, opts) => {
+const init = (fn, fp, data, opts) => {
 	if (!fp) {
 		throw new TypeError('Expected a filepath');
 	}
@@ -27,16 +29,42 @@ const main = (fn, fp, data, opts) => {
 		});
 	}
 
-	const json = JSON.stringify(data, opts.replacer, opts.indent);
-
-	return fn(fp, `${json}\n`, {mode: opts.mode});
+	return fn(fp, data, opts);
 };
 
-module.exports = (fp, data, opts) =>
-	makeDir(path.dirname(fp), {fs})
-		.then(() => main(pify(writeFileAtomic), fp, data, opts));
+const readFile = fp => {
+	return pathExists(fp)
+		.then(exists => exists ? pify(fs.readFile)(fp, 'utf8') : null);
+};
+
+const main = (fp, data, opts) => {
+	return (opts.auto ? readFile(fp) : Promise.resolve())
+		.then(str => {
+			const indent = str ? detectIndent(str).indent : opts.indent;
+			const json = JSON.stringify(data, opts.replacer, indent);
+
+			return pify(writeFileAtomic)(fp, `${json}\n`, {mode: opts.mode});
+		});
+};
+
+const mainSync = (fp, data, opts) => {
+	let indent = opts.indent;
+
+	if (opts.auto && pathExists.sync(fp)) {
+		indent = detectIndent(fs.readFileSync(fp, 'utf8'));
+	}
+
+	const json = JSON.stringify(data, opts.replacer, indent);
+
+	return writeFileAtomic.sync(fp, `${json}\n`, {mode: opts.mode});
+};
+
+module.exports = (fp, data, opts) => {
+	return makeDir(path.dirname(fp), {fs})
+		.then(() => init(main, fp, data, opts));
+};
 
 module.exports.sync = (fp, data, opts) => {
 	makeDir.sync(path.dirname(fp), {fs});
-	main(writeFileAtomic.sync, fp, data, opts);
+	init(mainSync, fp, data, opts);
 };
