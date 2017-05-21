@@ -6,7 +6,6 @@ const sortKeys = require('sort-keys');
 const makeDir = require('make-dir');
 const pify = require('pify');
 const detectIndent = require('detect-indent');
-const pathExists = require('path-exists');
 
 const init = (fn, fp, data, opts) => {
 	if (!fp) {
@@ -33,12 +32,18 @@ const init = (fn, fp, data, opts) => {
 };
 
 const readFile = fp => {
-	return pathExists(fp)
-		.then(exists => exists ? pify(fs.readFile)(fp, 'utf8') : null);
+	return pify(fs.readFile)(fp, 'utf8')
+		.catch(err => {
+			if (err.code === 'ENOENT') {
+				return null;
+			}
+
+			throw err;
+		});
 };
 
 const main = (fp, data, opts) => {
-	return (opts.auto ? readFile(fp) : Promise.resolve())
+	return (opts.detectIndent ? readFile(fp) : Promise.resolve())
 		.then(str => {
 			const indent = str ? detectIndent(str).indent : opts.indent;
 			const json = JSON.stringify(data, opts.replacer, indent);
@@ -50,8 +55,15 @@ const main = (fp, data, opts) => {
 const mainSync = (fp, data, opts) => {
 	let indent = opts.indent;
 
-	if (opts.auto && pathExists.sync(fp)) {
-		indent = detectIndent(fs.readFileSync(fp, 'utf8'));
+	if (opts.detectIndent) {
+		try {
+			const file = fs.readFileSync(fp, 'utf8');
+			indent = detectIndent(file).indent;
+		} catch (err) {
+			if (err.code !== 'ENOENT') {
+				throw err;
+			}
+		}
 	}
 
 	const json = JSON.stringify(data, opts.replacer, indent);

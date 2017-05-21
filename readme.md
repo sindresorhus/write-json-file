@@ -43,7 +43,7 @@ Default: `\t`
 Indentation as a string or number of spaces.<br>
 Pass in `null` for no formatting.
 
-##### auto
+##### detectIndent
 
 Type: `boolean`<br>
 Default: `false`
