@@ -33,13 +33,7 @@ const init = (fn, fp, data, opts) => {
 
 const readFile = fp => {
 	return pify(fs.readFile)(fp, 'utf8')
-		.catch(err => {
-			if (err.code === 'ENOENT') {
-				return null;
-			}
-
-			throw err;
-		});
+		.catch(() => {});
 };
 
 const main = (fp, data, opts) => {
