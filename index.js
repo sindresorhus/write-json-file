@@ -31,10 +31,7 @@ const init = (fn, fp, data, opts) => {
 	return fn(fp, data, opts);
 };
 
-const readFile = fp => {
-	return pify(fs.readFile)(fp, 'utf8')
-		.catch(() => {});
-};
+const readFile = fp => pify(fs.readFile)(fp, 'utf8').catch(() => {});
 
 const main = (fp, data, opts) => {
 	return (opts.detectIndent ? readFile(fp) : Promise.resolve())
