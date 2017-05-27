@@ -43,6 +43,13 @@ Default: `\t`
 Indentation as a string or number of spaces.<br>
 Pass in `null` for no formatting.
 
+##### detectIndent
+
+Type: `boolean`<br>
+Default: `false`
+
+Detect indentation automatically if the file exists.
+
 ##### sortKeys
 
 Type: `boolean` `function`<br>
