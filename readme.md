@@ -8,7 +8,7 @@ Creates directories for you as needed.
 ## Install
 
 ```
-$ npm install --save write-json-file
+$ npm install write-json-file
 ```
 
 
@@ -38,7 +38,7 @@ Type: `Object`
 ##### indent
 
 Type: `string` `number`<br>
-Default: `\t`
+Default: `'\t'`
 
 Indentation as a string or number of spaces.<br>
 Pass in `null` for no formatting.
