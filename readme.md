@@ -58,6 +58,13 @@ Default: `false`
 Sort the keys recursively.<br>
 Optionally pass in a [`compare`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) function.
 
+##### sortKeysDeep
+
+Type: `boolean`
+Default: `true`
+
+Optionally disable deep sorting of keys by passing `sortKeysDeep: false`.
+
 ##### replacer
 
 Type: `function`
