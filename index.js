@@ -18,12 +18,13 @@ const init = (fn, fp, data, opts) => {
 
 	opts = Object.assign({
 		indent: '\t',
-		sortKeys: false
+		sortKeys: false,
+		sortKeysDeep: true
 	}, opts);
 
 	if (opts.sortKeys) {
 		data = sortKeys(data, {
-			deep: true,
+			deep: opts.sortKeysDeep,
 			compare: typeof opts.sortKeys === 'function' && opts.sortKeys
 		});
 	}
