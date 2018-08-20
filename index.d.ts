@@ -29,7 +29,7 @@ interface Options {
  * Creates directories for you as needed.
  *
  * @example
- * import * as writeJsonFile from 'write-json-file';
+ * import writeJsonFile from 'write-json-file';
  *
  * writeJsonFile.sync('foo.json', {foo: true});
  * console.log('done');
