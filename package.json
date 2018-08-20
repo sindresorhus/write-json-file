@@ -13,13 +13,12 @@
     "node": ">=6"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "xo --ignore index.d.ts && ava"
   },
   "files": [
     "index.js",
     "index.d.ts"
   ],
-  "types": "index.d.ts",
   "keywords": [
     "write",
     "json",

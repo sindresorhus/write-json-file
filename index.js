@@ -62,17 +62,13 @@ const mainSync = (fp, data, opts) => {
 	return writeFileAtomic.sync(fp, `${json}\n`, {mode: opts.mode});
 };
 
-module.exports = (fp, data, opts) => {
+const writeJsonFile = (fp, data, opts) => {
 	return makeDir(path.dirname(fp), {fs})
 		.then(() => init(main, fp, data, opts));
 };
 
-// Support for Typescript default export
-module.exports.default = (fp, data, opts) => {
-	return makeDir(path.dirname(fp), {fs})
-		.then(() => init(main, fp, data, opts));
-};
-
+module.exports = writeJsonFile;
+module.exports.default = writeJsonFile;
 module.exports.sync = (fp, data, opts) => {
 	makeDir.sync(path.dirname(fp), {fs});
 	init(mainSync, fp, data, opts);
