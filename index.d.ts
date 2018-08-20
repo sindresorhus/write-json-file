@@ -46,7 +46,7 @@ export function sync(filepath: string, data: any, options?: Options): void;
  *
  * (async () => {
  * 	await writeJsonFile('foo.json', {foo: true});
- *  console.log('done');
+ * 	console.log('done');
  * })();
  */
 export default function writeJsonFile(filepath: string, data: any, options?: Options): Promise<void>;
