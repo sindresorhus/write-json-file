@@ -28,7 +28,6 @@ interface Options {
  *
  * Creates directories for you as needed.
  *
- * @returns {void}
  * @example
  * import * as writeJsonFile from 'write-json-file';
  *
@@ -42,13 +41,12 @@ export function sync(filepath: string, data: any, options?: Options): void;
  *
  * Creates directories for you as needed.
  *
- * @returns {Promise<void>}
  * @example
  * import writeJsonFile from 'write-json-file';
  *
  * (async () => {
- * 		await writeJsonFile('foo.json', {foo: true});
- *  	console.log('done');
+ * 	await writeJsonFile('foo.json', {foo: true});
+ *  console.log('done');
  * })();
  */
 export default function writeJsonFile(filepath: string, data: any, options?: Options): Promise<void>;
