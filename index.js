@@ -44,7 +44,7 @@ const main = (fp, data, opts) => {
 };
 
 const mainSync = (fp, data, opts) => {
-	let indent = opts.indent;
+	let {indent} = opts;
 
 	if (opts.detectIndent) {
 		try {
