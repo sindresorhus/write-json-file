@@ -24,7 +24,7 @@ interface Options {
 }
 
 /**
- * Stringify and write JSON to a file atomically
+ * Stringify and write JSON to a file atomically.
  *
  * Creates directories for you as needed.
  *
@@ -38,7 +38,7 @@ interface Options {
 export function sync(filepath: string, data: any, options?: Options): void;
 
 /**
- * Stringify and write JSON to a file atomically
+ * Stringify and write JSON to a file atomically.
  *
  * Creates directories for you as needed.
  *
