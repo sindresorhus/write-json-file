@@ -1,6 +1,7 @@
-type Replacer = (key: string, value: any) => void;
+export type Replacer = (key: string, value: any) => void;
+export type SortKeys = (a: string, b: string) => number;
 
-interface Options {
+export interface Options {
 	/**
 	 * Indentation as a string or number of spaces. Pass in null for no formatting.
 	 *
@@ -18,7 +19,7 @@ interface Options {
 	 *
 	 * @default false
 	 */
-	sortKeys?: boolean | ((a: string, b: string) => number);
+	sortKeys?: SortKeys | boolean;
 	/**
 	 * Passed into JSON.stringify.
 	 */
@@ -42,7 +43,7 @@ interface Options {
  * writeJsonFile.sync('foo.json', {foo: true});
  * console.log('done');
  */
-export function sync(filepath: string, data: any, options?: Options): void;
+export function sync(filepath: string, data: object | number | string, options?: Options): void;
 
 /**
  * Stringify and write JSON to a file atomically.
@@ -57,4 +58,4 @@ export function sync(filepath: string, data: any, options?: Options): void;
  * 	console.log('done');
  * })();
  */
-export default function writeJsonFile(filepath: string, data: any, options?: Options): Promise<void>;
+export default function writeJsonFile(filepath: string, data: object | number | string, options?: Options): Promise<void>;
