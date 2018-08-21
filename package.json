@@ -47,8 +47,8 @@
     "xo": "*"
   },
   "xo": {
-		"ignores": [
-			"index.d.ts"
-		]
-	}
+    "ignores": [
+      "index.d.ts"
+    ]
+  }
 }
