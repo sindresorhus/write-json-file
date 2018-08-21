@@ -4,19 +4,19 @@ interface Options {
 	/**
 	 * Indentation as a string or number of spaces. Pass in null for no formatting.
 	 *
-	 * Default: '\t'
+	 * @default '\t'
 	 */
 	indent?: string | number | null;
 	/**
 	 * Detect indentation automatically if the file exists.
 	 *
-	 * Default: false
+	 * @default false
 	 */
 	detectIndent?: boolean;
 	/**
 	 * Sort the keys recursively. Optionally pass in a compare function.
 	 *
-	 * Default: false
+	 * @default false
 	 */
 	sortKeys?: boolean | ((a: string, b: string) => number);
 	/**
@@ -26,7 +26,7 @@ interface Options {
 	/**
 	 * Mode used when writing the file.
 	 *
-	 * Default: 0o666
+	 * @default 0o666
 	 */
 	mode?: number;
 }
