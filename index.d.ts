@@ -1,5 +1,6 @@
 export type Replacer = (key: string, value: any) => void;
 export type SortKeys = (a: string, b: string) => number;
+export type JSONStringifyable = object | number | string;
 
 export interface Options {
 	/**
@@ -19,7 +20,7 @@ export interface Options {
 	 *
 	 * @default false
 	 */
-	sortKeys?: SortKeys | boolean;
+	sortKeys?: boolean | SortKeys;
 	/**
 	 * Passed into JSON.stringify.
 	 */
@@ -43,7 +44,7 @@ export interface Options {
  * writeJsonFile.sync('foo.json', {foo: true});
  * console.log('done');
  */
-export function sync(filepath: string, data: object | number | string, options?: Options): void;
+export function sync(filepath: string, data: JSONStringifyable, options?: Options): void;
 
 /**
  * Stringify and write JSON to a file atomically.
@@ -58,4 +59,4 @@ export function sync(filepath: string, data: object | number | string, options?:
  * 	console.log('done');
  * })();
  */
-export default function writeJsonFile(filepath: string, data: object | number | string, options?: Options): Promise<void>;
+export default function writeJsonFile(filepath: string, data: JSONStringifyable, options?: Options): Promise<void>;
