@@ -22,7 +22,7 @@ export interface Options {
 	 */
 	sortKeys?: boolean | SortKeys;
 	/**
-	 * Passed into JSON.stringify.
+	 * Passed into `JSON.stringify`.
 	 */
 	replacer?: Replacer | Array<number | string>;
 	/**
