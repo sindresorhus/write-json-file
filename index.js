@@ -7,8 +7,8 @@ const makeDir = require('make-dir');
 const pify = require('pify');
 const detectIndent = require('detect-indent');
 
-const init = (fn, fp, data, opts) => {
-	if (!fp) {
+const init = (fn, filePath, data, options) => {
+	if (!filePath) {
 		throw new TypeError('Expected a filepath');
 	}
 
@@ -16,61 +16,61 @@ const init = (fn, fp, data, opts) => {
 		throw new TypeError('Expected data to stringify');
 	}
 
-	opts = Object.assign({
+	options = Object.assign({
 		indent: '\t',
 		sortKeys: false
-	}, opts);
+	}, options);
 
-	if (opts.sortKeys) {
+	if (options.sortKeys) {
 		data = sortKeys(data, {
 			deep: true,
-			compare: typeof opts.sortKeys === 'function' && opts.sortKeys
+			compare: typeof options.sortKeys === 'function' && options.sortKeys
 		});
 	}
 
-	return fn(fp, data, opts);
+	return fn(filePath, data, options);
 };
 
-const readFile = fp => pify(fs.readFile)(fp, 'utf8').catch(() => {});
+const readFile = filePath => pify(fs.readFile)(filePath, 'utf8').catch(() => {});
 
-const main = (fp, data, opts) => {
-	return (opts.detectIndent ? readFile(fp) : Promise.resolve())
-		.then(str => {
-			const indent = str ? detectIndent(str).indent : opts.indent;
-			const json = JSON.stringify(data, opts.replacer, indent);
+const main = (filePath, data, options) => {
+	return (options.detectIndent ? readFile(filePath) : Promise.resolve())
+		.then(string => {
+			const indent = string ? detectIndent(string).indent : options.indent;
+			const json = JSON.stringify(data, options.replacer, indent);
 
-			return pify(writeFileAtomic)(fp, `${json}\n`, {mode: opts.mode});
+			return pify(writeFileAtomic)(filePath, `${json}\n`, {mode: options.mode});
 		});
 };
 
-const mainSync = (fp, data, opts) => {
-	let {indent} = opts;
+const mainSync = (filePath, data, options) => {
+	let {indent} = options;
 
-	if (opts.detectIndent) {
+	if (options.detectIndent) {
 		try {
-			const file = fs.readFileSync(fp, 'utf8');
+			const file = fs.readFileSync(filePath, 'utf8');
 			// eslint-disable-next-line prefer-destructuring
 			indent = detectIndent(file).indent;
-		} catch (err) {
-			if (err.code !== 'ENOENT') {
-				throw err;
+		} catch (error) {
+			if (error.code !== 'ENOENT') {
+				throw error;
 			}
 		}
 	}
 
-	const json = JSON.stringify(data, opts.replacer, indent);
+	const json = JSON.stringify(data, options.replacer, indent);
 
-	return writeFileAtomic.sync(fp, `${json}\n`, {mode: opts.mode});
+	return writeFileAtomic.sync(filePath, `${json}\n`, {mode: options.mode});
 };
 
-const writeJsonFile = (fp, data, opts) => {
-	return makeDir(path.dirname(fp), {fs})
-		.then(() => init(main, fp, data, opts));
+const writeJsonFile = (filePath, data, options) => {
+	return makeDir(path.dirname(filePath), {fs})
+		.then(() => init(main, filePath, data, options));
 };
 
 module.exports = writeJsonFile;
 module.exports.default = writeJsonFile;
-module.exports.sync = (fp, data, opts) => {
-	makeDir.sync(path.dirname(fp), {fs});
-	init(mainSync, fp, data, opts);
+module.exports.sync = (filePath, data, options) => {
+	makeDir.sync(path.dirname(filePath), {fs});
+	init(mainSync, filePath, data, options);
 };

@@ -17,19 +17,19 @@ $ npm install write-json-file
 ```js
 const writeJsonFile = require('write-json-file');
 
-writeJsonFile('foo.json', {foo: true}).then(() => {
-	console.log('done');
-});
+(async () => {
+	await writeJsonFile('foo.json', {foo: true});
+})();
 ```
 
 
 ## API
 
-### writeJsonFile(filepath, data, [options])
+### writeJsonFile(filePath, data, [options])
 
 Returns a `Promise`.
 
-### writeJsonFile.sync(filepath, data, [options])
+### writeJsonFile.sync(filePath, data, [options])
 
 #### options
 
@@ -52,7 +52,7 @@ Detect indentation automatically if the file exists.
 
 ##### sortKeys
 
-Type: `boolean` `function`<br>
+Type: `boolean` `Function`<br>
 Default: `false`
 
 Sort the keys recursively.<br>
@@ -60,7 +60,7 @@ Optionally pass in a [`compare`](https://developer.mozilla.org/en-US/docs/Web/Ja
 
 ##### replacer
 
-Type: `function`
+Type: `Function`
 
 Passed into [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#The_replacer_parameter).
 
