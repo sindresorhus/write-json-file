@@ -42,7 +42,6 @@ export interface Options {
  * import * as writeJsonFile from 'write-json-file';
  *
  * writeJsonFile.sync('foo.json', {foo: true});
- * console.log('done');
  */
 export function sync(filepath: string, data: JSONStringifyable, options?: Options): void;
 
@@ -56,7 +55,6 @@ export function sync(filepath: string, data: JSONStringifyable, options?: Option
  *
  * (async () => {
  * 	await writeJsonFile('foo.json', {foo: true});
- * 	console.log('done');
  * })();
  */
 export default function writeJsonFile(filepath: string, data: JSONStringifyable, options?: Options): Promise<void>;
