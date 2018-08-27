@@ -44,11 +44,12 @@ const main = (fp, data, opts) => {
 };
 
 const mainSync = (fp, data, opts) => {
-	let indent = opts.indent;
+	let {indent} = opts;
 
 	if (opts.detectIndent) {
 		try {
 			const file = fs.readFileSync(fp, 'utf8');
+			// eslint-disable-next-line prefer-destructuring
 			indent = detectIndent(file).indent;
 		} catch (err) {
 			if (err.code !== 'ENOENT') {
@@ -62,11 +63,13 @@ const mainSync = (fp, data, opts) => {
 	return writeFileAtomic.sync(fp, `${json}\n`, {mode: opts.mode});
 };
 
-module.exports = (fp, data, opts) => {
+const writeJsonFile = (fp, data, opts) => {
 	return makeDir(path.dirname(fp), {fs})
 		.then(() => init(main, fp, data, opts));
 };
 
+module.exports = writeJsonFile;
+module.exports.default = writeJsonFile;
 module.exports.sync = (fp, data, opts) => {
 	makeDir.sync(path.dirname(fp), {fs});
 	init(mainSync, fp, data, opts);

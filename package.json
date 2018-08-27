@@ -10,13 +10,14 @@
     "url": "sindresorhus.com"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "test": "xo && ava"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "index.d.ts"
   ],
   "keywords": [
     "write",
@@ -44,5 +45,10 @@
     "ava": "*",
     "tempfile": "^2.0.0",
     "xo": "*"
+  },
+  "xo": {
+    "ignores": [
+      "index.d.ts"
+    ]
   }
 }
