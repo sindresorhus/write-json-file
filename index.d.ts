@@ -1,6 +1,6 @@
-export type Replacer = (key: string, value: any) => void;
+export type Replacer = (key: string, value: any) => number | string | boolean | object | null | undefined;
 export type SortKeys = (a: string, b: string) => number;
-export type JSONStringifyable = object | number | string;
+export type JSONStringifyable = object | number | string | boolean;
 
 export interface Options {
 	/**
