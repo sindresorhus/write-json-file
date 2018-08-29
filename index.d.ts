@@ -39,6 +39,7 @@ export interface Options {
  * Creates directories for you as needed.
  *
  * @example
+ *
  * import * as writeJsonFile from 'write-json-file';
  *
  * writeJsonFile.sync('foo.json', {foo: true});
@@ -51,6 +52,7 @@ export function sync(filepath: string, data: JSONStringifyable, options?: Option
  * Creates directories for you as needed.
  *
  * @example
+ *
  * import writeJsonFile from 'write-json-file';
  *
  * (async () => {
