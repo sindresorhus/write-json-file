@@ -13,7 +13,7 @@
 		"node": ">=6"
 	},
 	"scripts": {
-		"test": "xo && ava"
+		"test": "xo && ava && tsd-check"
 	},
 	"files": [
 		"index.js",
@@ -44,11 +44,12 @@
 	"devDependencies": {
 		"ava": "*",
 		"tempfile": "^2.0.0",
+		"tsd-check": "^0.1.0",
 		"xo": "*"
 	},
 	"xo": {
 		"ignores": [
-			"index.d.ts"
+			"*.ts"
 		]
 	}
 }
