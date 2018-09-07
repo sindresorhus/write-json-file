@@ -24,7 +24,7 @@ const init = (fn, filePath, data, options) => {
 	if (options.sortKeys) {
 		data = sortKeys(data, {
 			deep: true,
-			compare: typeof options.sortKeys === 'function' && options.sortKeys
+			compare: typeof options.sortKeys === 'function' ? options.sortKeys : undefined
 		});
 	}
 

@@ -35,3 +35,15 @@ test('fall back to default indent if file doesn\'t exist', async t => {
 	await m(tmp, {foo: true, bar: true, foobar: true}, {detectIndent: true});
 	t.is(fs.readFileSync(tmp, 'utf8'), '{\n\t"foo": true,\n\t"bar": true,\n\t"foobar": true\n}\n');
 });
+
+test('async - {sortKeys: true}', async t => {
+	const tmp = path.join(tempfile(), 'foo');
+	await m(tmp, {c: true, b: true, a: true}, {sortKeys: true});
+	t.is(fs.readFileSync(tmp, 'utf8'), '{\n\t"a": true,\n\t"b": true,\n\t"c": true\n}\n');
+});
+
+test('async - {sortKeys: false}', async t => {
+	const tmp = path.join(tempfile(), 'foo');
+	await m(tmp, {c: true, b: true, a: true}, {sortKeys: false});
+	t.is(fs.readFileSync(tmp, 'utf8'), '{\n\t"c": true,\n\t"b": true,\n\t"a": true\n}\n');
+});
