@@ -9,22 +9,26 @@ export interface Options {
 	 * @default '\t'
 	 */
 	indent?: string | number | null;
+
 	/**
 	 * Detect indentation automatically if the file exists.
 	 *
 	 * @default false
 	 */
 	detectIndent?: boolean;
+
 	/**
 	 * Sort the keys recursively. Optionally pass in a compare function.
 	 *
 	 * @default false
 	 */
 	sortKeys?: boolean | SortKeys;
+
 	/**
 	 * Passed into `JSON.stringify`.
 	 */
 	replacer?: Replacer | Array<number | string>;
+
 	/**
 	 * Mode used when writing the file.
 	 *
