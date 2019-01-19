@@ -40,6 +40,8 @@ test('async - {sortKeys: true}', async t => {
 	const tmp = path.join(tempfile(), 'foo');
 	await m(tmp, {c: true, b: true, a: true}, {sortKeys: true});
 	t.is(fs.readFileSync(tmp, 'utf8'), '{\n\t"a": true,\n\t"b": true,\n\t"c": true\n}\n');
+	await m(tmp, ['a', 'b', 'c'], {sortKeys: true});
+	t.is(fs.readFileSync(tmp, 'utf8'), '[\n\t"a",\n\t"b",\n\t"c"\n]\n');
 });
 
 test('async - {sortKeys: false}', async t => {

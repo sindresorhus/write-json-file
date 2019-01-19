@@ -36,6 +36,7 @@
 	"dependencies": {
 		"detect-indent": "^5.0.0",
 		"graceful-fs": "^4.1.2",
+		"is-plain-obj": "^1.1.0",
 		"make-dir": "^1.0.0",
 		"pify": "^4.0.0",
 		"sort-keys": "^2.0.0",

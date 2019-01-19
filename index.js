@@ -6,6 +6,7 @@ const sortKeys = require('sort-keys');
 const makeDir = require('make-dir');
 const pify = require('pify');
 const detectIndent = require('detect-indent');
+const isPlainObj = require('is-plain-obj');
 
 const init = (fn, filePath, data, options) => {
 	if (!filePath) {
@@ -21,7 +22,7 @@ const init = (fn, filePath, data, options) => {
 		sortKeys: false
 	}, options);
 
-	if (options.sortKeys) {
+	if (options.sortKeys && isPlainObj(data)) {
 		data = sortKeys(data, {
 			deep: true,
 			compare: typeof options.sortKeys === 'function' ? options.sortKeys : undefined
