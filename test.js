@@ -47,3 +47,15 @@ test('async - {sortKeys: false}', async t => {
 	await m(tmp, {c: true, b: true, a: true}, {sortKeys: false});
 	t.is(fs.readFileSync(tmp, 'utf8'), '{\n\t"c": true,\n\t"b": true,\n\t"a": true\n}\n');
 });
+
+test('async - `replacer` option', async t => {
+	const tmp = path.join(tempfile(), 'foo');
+	await m(tmp, {foo: true, bar: true}, {replacer: ['foo']});
+	t.is(fs.readFileSync(tmp, 'utf8'), '{\n\t"foo": true\n}\n');
+});
+
+test('sync - `replacer` option', t => {
+	const tmp = path.join(tempfile(), 'foo');
+	m.sync(tmp, {foo: true, bar: true}, {replacer: ['foo']});
+	t.is(fs.readFileSync(tmp, 'utf8'), '{\n\t"foo": true\n}\n');
+});
