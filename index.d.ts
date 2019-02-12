@@ -1,6 +1,6 @@
-export type Replacer = (key: string, value: any) => number | string | boolean | object | null | undefined;
+export type Replacer = (this: unknown, key: string, value: unknown) => unknown;
 export type SortKeys = (a: string, b: string) => number;
-export type JSONStringifyable = object | number | string | boolean;
+export type JSONStringifyable = string | number | boolean | null | object;
 
 export interface Options {
 	/**
@@ -8,33 +8,33 @@ export interface Options {
 	 *
 	 * @default '\t'
 	 */
-	indent?: string | number | null;
+	readonly indent?: string | number | null;
 
 	/**
 	 * Detect indentation automatically if the file exists.
 	 *
 	 * @default false
 	 */
-	detectIndent?: boolean;
+	readonly detectIndent?: boolean;
 
 	/**
 	 * Sort the keys recursively. Optionally pass in a compare function.
 	 *
 	 * @default false
 	 */
-	sortKeys?: boolean | SortKeys;
+	readonly sortKeys?: boolean | SortKeys;
 
 	/**
 	 * Passed into `JSON.stringify`.
 	 */
-	replacer?: Replacer | Array<number | string>;
+	readonly replacer?: Replacer | Array<number | string>;
 
 	/**
 	 * Mode used when writing the file.
 	 *
 	 * @default 0o666
 	 */
-	mode?: number;
+	readonly mode?: number;
 }
 
 /**

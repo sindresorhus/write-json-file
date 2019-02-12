@@ -49,7 +49,6 @@ const mainSync = (filePath, data, options) => {
 	if (options.detectIndent) {
 		try {
 			const file = fs.readFileSync(filePath, 'utf8');
-			// eslint-disable-next-line prefer-destructuring
 			indent = detectIndent(file).indent;
 		} catch (error) {
 			if (error.code !== 'ENOENT') {
