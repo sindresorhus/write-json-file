@@ -68,6 +68,7 @@ const writeJsonFile = (filePath, data, options) => {
 };
 
 module.exports = writeJsonFile;
+// TODO: Remove this for the next major release
 module.exports.default = writeJsonFile;
 module.exports.sync = (filePath, data, options) => {
 	makeDir.sync(path.dirname(filePath), {fs});
