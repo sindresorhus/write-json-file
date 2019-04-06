@@ -1,5 +1,5 @@
 declare namespace writeJsonFile {
-	type Replacer = (this: unknown, key: string, value: any) => unknown;
+	type Replacer = (this: unknown, key: string, value: unknown) => unknown;
 	type SortKeys = (a: string, b: string) => number;
 	type JSONStringifyable = string | number | boolean | null | object;
 
