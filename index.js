@@ -1,11 +1,14 @@
 'use strict';
+const {promisify} = require('util');
 const path = require('path');
 const fs = require('graceful-fs');
 const writeFileAtomic = require('write-file-atomic');
 const sortKeys = require('sort-keys');
 const makeDir = require('make-dir');
-const pify = require('pify');
 const detectIndent = require('detect-indent');
+
+const readFile = promisify(fs.readFile);
+const writeFileAtomicP = promisify(writeFileAtomic);
 
 const init = (fn, filePath, data, options) => {
 	if (!filePath) {
@@ -16,10 +19,11 @@ const init = (fn, filePath, data, options) => {
 		throw new TypeError('Expected data to stringify');
 	}
 
-	options = Object.assign({
+	options = {
 		indent: '\t',
-		sortKeys: false
-	}, options);
+		sortKeys: false,
+		...options
+	};
 
 	if (options.sortKeys) {
 		data = sortKeys(data, {
@@ -31,16 +35,23 @@ const init = (fn, filePath, data, options) => {
 	return fn(filePath, data, options);
 };
 
-const readFile = filePath => pify(fs.readFile)(filePath, 'utf8').catch(() => {});
+const main = async (filePath, data, options) => {
+	let {indent} = options;
 
-const main = (filePath, data, options) => {
-	return (options.detectIndent ? readFile(filePath) : Promise.resolve())
-		.then(string => {
-			const indent = string ? detectIndent(string).indent : options.indent;
-			const json = JSON.stringify(data, options.replacer, indent);
+	if (options.detectIndent) {
+		try {
+			const file = await readFile(filePath, 'utf8');
+			indent = detectIndent(file).indent;
+		} catch (error) {
+			if (error.code !== 'ENOENT') {
+				throw error;
+			}
+		}
+	}
 
-			return pify(writeFileAtomic)(filePath, `${json}\n`, {mode: options.mode});
-		});
+	const json = JSON.stringify(data, options.replacer, indent);
+
+	return writeFileAtomicP(filePath, `${json}\n`, {mode: options.mode});
 };
 
 const mainSync = (filePath, data, options) => {
@@ -62,14 +73,11 @@ const mainSync = (filePath, data, options) => {
 	return writeFileAtomic.sync(filePath, `${json}\n`, {mode: options.mode});
 };
 
-const writeJsonFile = (filePath, data, options) => {
-	return makeDir(path.dirname(filePath), {fs})
-		.then(() => init(main, filePath, data, options));
+module.exports = async (filePath, data, options) => {
+	await makeDir(path.dirname(filePath), {fs});
+	return init(main, filePath, data, options);
 };
 
-module.exports = writeJsonFile;
-// TODO: Remove this for the next major release
-module.exports.default = writeJsonFile;
 module.exports.sync = (filePath, data, options) => {
 	makeDir.sync(path.dirname(filePath), {fs});
 	init(mainSync, filePath, data, options);

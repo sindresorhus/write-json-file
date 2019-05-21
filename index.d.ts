@@ -1,15 +1,14 @@
 declare namespace writeJsonFile {
 	type Replacer = (this: unknown, key: string, value: any) => unknown;
 	type SortKeys = (a: string, b: string) => number;
-	type JSONStringifyable = string | number | boolean | null | object;
 
 	interface Options {
 		/**
-		Indentation as a string or number of spaces. Pass in null for no formatting.
+		Indentation as a string or number of spaces. Pass in `undefined` for no formatting.
 
 		@default '\t'
 		*/
-		readonly indent?: string | number | null;
+		readonly indent?: string | number | undefined;
 
 		/**
 		Detect indentation automatically if the file exists.
@@ -28,7 +27,7 @@ declare namespace writeJsonFile {
 		/**
 		Passed into `JSON.stringify`.
 		*/
-		readonly replacer?: Replacer | Array<number | string>;
+		readonly replacer?: Replacer | ReadonlyArray<number | string>;
 
 		/**
 		Mode used when writing the file.
@@ -55,8 +54,8 @@ declare const writeJsonFile: {
 	```
 	*/
 	(
-		filepath: string,
-		data: writeJsonFile.JSONStringifyable,
+		filePath: string,
+		data: unknown,
 		options?: writeJsonFile.Options
 	): Promise<void>;
 
@@ -73,13 +72,10 @@ declare const writeJsonFile: {
 	```
 	*/
 	sync(
-		filepath: string,
-		data: writeJsonFile.JSONStringifyable,
+		filePath: string,
+		data: unknown,
 		options?: writeJsonFile.Options
 	): void;
-
-	// TODO: Remove this for the next major release
-	default: typeof writeJsonFile;
 };
 
 export = writeJsonFile;

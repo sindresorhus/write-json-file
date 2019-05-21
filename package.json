@@ -10,7 +10,7 @@
 		"url": "sindresorhus.com"
 	},
 	"engines": {
-		"node": ">=6"
+		"node": ">=8"
 	},
 	"scripts": {
 		"test": "xo && ava && tsd"
@@ -34,17 +34,16 @@
 		"atomically"
 	],
 	"dependencies": {
-		"detect-indent": "^5.0.0",
+		"detect-indent": "^6.0.0",
 		"graceful-fs": "^4.1.15",
-		"make-dir": "^2.1.0",
-		"pify": "^4.0.1",
-		"sort-keys": "^2.0.0",
+		"make-dir": "^3.0.0",
+		"sort-keys": "^3.0.0",
 		"write-file-atomic": "^2.4.2"
 	},
 	"devDependencies": {
 		"ava": "^1.4.1",
-		"tempfile": "^2.0.0",
-		"tsd": "^0.7.2",
+		"tempy": "^0.3.0",
+		"tsd": "^0.7.3",
 		"xo": "^0.24.0"
 	}
 }

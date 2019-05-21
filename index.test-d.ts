@@ -1,13 +1,6 @@
 import {expectType} from 'tsd';
 import writeJsonFile = require('.');
-import {sync, Replacer, SortKeys, JSONStringifyable} from '.';
-
-expectType<JSONStringifyable>('🦄');
-expectType<JSONStringifyable>(1);
-expectType<JSONStringifyable>(true);
-expectType<JSONStringifyable>(new Date());
-expectType<JSONStringifyable>(['hello', 'world']);
-expectType<JSONStringifyable>({unicorn: '🦄'});
+import {sync, Replacer, SortKeys} from '.';
 
 expectType<SortKeys>(() => 1);
 expectType<SortKeys>((a: string) => a.length);

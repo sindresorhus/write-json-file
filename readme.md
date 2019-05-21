@@ -33,15 +33,16 @@ Returns a `Promise`.
 
 #### options
 
-Type: `Object`
+Type: `object`
 
 ##### indent
 
-Type: `string` `number`<br>
+Type: `string | number`<br>
 Default: `'\t'`
 
-Indentation as a string or number of spaces.<br>
-Pass in `null` for no formatting.
+Indentation as a string or number of spaces.
+
+Pass in `undefined` for no formatting.
 
 ##### detectIndent
 
@@ -52,7 +53,7 @@ Detect indentation automatically if the file exists.
 
 ##### sortKeys
 
-Type: `boolean` `Function`<br>
+Type: `boolean | Function`<br>
 Default: `false`
 
 Sort the keys recursively.<br>
