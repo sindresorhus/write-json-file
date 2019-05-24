@@ -38,7 +38,7 @@
 		"graceful-fs": "^4.1.15",
 		"make-dir": "^3.0.0",
 		"sort-keys": "^3.0.0",
-		"write-file-atomic": "^2.4.2"
+		"write-file-atomic": "^3.0.0"
 	},
 	"devDependencies": {
 		"ava": "^1.4.1",
