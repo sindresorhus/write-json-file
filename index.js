@@ -8,7 +8,6 @@ const makeDir = require('make-dir');
 const detectIndent = require('detect-indent');
 
 const readFile = promisify(fs.readFile);
-const writeFileAtomicP = promisify(writeFileAtomic);
 
 const init = (fn, filePath, data, options) => {
 	if (!filePath) {
@@ -51,7 +50,7 @@ const main = async (filePath, data, options) => {
 
 	const json = JSON.stringify(data, options.replacer, indent);
 
-	return writeFileAtomicP(filePath, `${json}\n`, {mode: options.mode});
+	return writeFileAtomic(filePath, `${json}\n`, {mode: options.mode});
 };
 
 const mainSync = (filePath, data, options) => {
