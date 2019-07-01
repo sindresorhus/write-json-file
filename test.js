@@ -39,6 +39,9 @@ test('async - {sortKeys: true}', async t => {
 	const tempFile = tempy.file();
 	await writeJsonFile(tempFile, {c: true, b: true, a: true}, {sortKeys: true});
 	t.is(fs.readFileSync(tempFile, 'utf8'), '{\n\t"a": true,\n\t"b": true,\n\t"c": true\n}\n');
+
+	await writeJsonFile(tempFile, ['c', 'b', 'a'], {sortKeys: true});
+	t.is(fs.readFileSync(tempFile, 'utf8'), '[\n\t"c",\n\t"b",\n\t"a"\n]\n');
 });
 
 test('async - {sortKeys: false}', async t => {

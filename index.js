@@ -6,6 +6,7 @@ const writeFileAtomic = require('write-file-atomic');
 const sortKeys = require('sort-keys');
 const makeDir = require('make-dir');
 const detectIndent = require('detect-indent');
+const isPlainObj = require('is-plain-obj');
 
 const readFile = promisify(fs.readFile);
 
@@ -24,7 +25,7 @@ const init = (fn, filePath, data, options) => {
 		...options
 	};
 
-	if (options.sortKeys) {
+	if (options.sortKeys && isPlainObj(data)) {
 		data = sortKeys(data, {
 			deep: true,
 			compare: typeof options.sortKeys === 'function' ? options.sortKeys : undefined
