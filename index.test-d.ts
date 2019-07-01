@@ -1,12 +1,6 @@
-import {expectType} from 'tsd-check';
-import writeJsonFile, {sync, Replacer, SortKeys, JSONStringifyable} from '.';
-
-expectType<JSONStringifyable>('🦄');
-expectType<JSONStringifyable>(1);
-expectType<JSONStringifyable>(true);
-expectType<JSONStringifyable>(new Date());
-expectType<JSONStringifyable>(['hello', 'world']);
-expectType<JSONStringifyable>({unicorn: '🦄'});
+import {expectType} from 'tsd';
+import writeJsonFile = require('.');
+import {sync, Replacer, SortKeys} from '.';
 
 expectType<SortKeys>(() => 1);
 expectType<SortKeys>((a: string) => a.length);
@@ -23,18 +17,18 @@ expectType<Replacer>(() => () => 'foo');
 expectType<Replacer>((key: string) => key.toUpperCase());
 expectType<Replacer>((key: string, value: string) => (key + value).toUpperCase());
 
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}));
-expectType<void>(await writeJsonFile('unicorn.json', '🦄'));
-expectType<void>(await writeJsonFile('date.json', new Date()));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {detectIndent: true}));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {indent: ' '}));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {indent: 4}));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {mode: 0o666}));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {replacer: ['unicorn', 1]}));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {replacer: () => 'unicorn'}));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {sortKeys: () => -1}));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {sortKeys: (a: string, b: string) => a.length - b.length}));
-expectType<void>(await writeJsonFile('unicorn.json', {unicorn: '🦄'}, {sortKeys: true}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', '🦄'));
+expectType<Promise<void>>(writeJsonFile('date.json', new Date()));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {detectIndent: true}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {indent: ' '}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {indent: 4}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {mode: 0o666}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {replacer: ['unicorn', 1]}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {replacer: () => 'unicorn'}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {sortKeys: () => -1}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {sortKeys: (a: string, b: string) => a.length - b.length}));
+expectType<Promise<void>>(writeJsonFile('unicorn.json', {unicorn: '🦄'}, {sortKeys: true}));
 
 expectType<void>(sync('unicorn.json', {unicorn: '🦄'}));
 expectType<void>(sync('unicorn.json', '🦄'));

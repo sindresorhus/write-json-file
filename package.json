@@ -1,6 +1,6 @@
 {
 	"name": "write-json-file",
-	"version": "3.0.2",
+	"version": "4.1.0",
 	"description": "Stringify and write JSON to a file atomically",
 	"license": "MIT",
 	"repository": "sindresorhus/write-json-file",
@@ -10,10 +10,10 @@
 		"url": "sindresorhus.com"
 	},
 	"engines": {
-		"node": ">=6"
+		"node": ">=8"
 	},
 	"scripts": {
-		"test": "xo && ava && tsd-check"
+		"test": "xo && ava && tsd"
 	},
 	"files": [
 		"index.js",
@@ -34,18 +34,17 @@
 		"atomically"
 	],
 	"dependencies": {
-		"detect-indent": "^5.0.0",
-		"graceful-fs": "^4.1.2",
-		"is-plain-obj": "^1.1.0",
-		"make-dir": "^1.0.0",
-		"pify": "^4.0.0",
-		"sort-keys": "^2.0.0",
-		"write-file-atomic": "^2.0.0"
+		"detect-indent": "^6.0.0",
+		"graceful-fs": "^4.1.15",
+    "is-plain-obj": "^1.1.0",
+		"make-dir": "^3.0.0",
+		"sort-keys": "^3.0.0",
+		"write-file-atomic": "^3.0.0"
 	},
 	"devDependencies": {
-		"ava": "*",
-		"tempfile": "^2.0.0",
-		"tsd-check": "^0.2.1",
-		"xo": "*"
+		"ava": "^1.4.1",
+		"tempy": "^0.3.0",
+		"tsd": "^0.7.3",
+		"xo": "^0.24.0"
 	}
 }
