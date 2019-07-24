@@ -10,7 +10,7 @@ const isPlainObj = require('is-plain-obj');
 
 const readFile = promisify(fs.readFile);
 
-const detectEOF = (file) => {
+const detectEOF = file => {
 	const detected = file.match(/\r?\n$/);
 	return detected ? detected[0] : '';
 };
@@ -43,7 +43,6 @@ const init = (fn, filePath, data, options) => {
 const main = async (filePath, data, options) => {
 	let {indent} = options;
 	let EOF = '\n';
-	let file;
 	try {
 		const file = await readFile(filePath, 'utf8');
 		EOF = detectEOF(file);
@@ -64,9 +63,8 @@ const main = async (filePath, data, options) => {
 const mainSync = (filePath, data, options) => {
 	let {indent} = options;
 	let EOF = '\n';
-	let file;
 	try {
-		file = fs.readFileSync(filePath, 'utf8');
+		const file = fs.readFileSync(filePath, 'utf8');
 		EOF = detectEOF(file);
 		if (options.detectIndent) {
 			indent = detectIndent(file).indent;
