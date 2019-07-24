@@ -61,3 +61,17 @@ test('sync - `replacer` option', t => {
 	writeJsonFile.sync(tempFile, {foo: true, bar: true}, {replacer: ['foo']});
 	t.is(fs.readFileSync(tempFile, 'utf8'), '{\n\t"foo": true\n}\n');
 });
+
+test('async - respect EOF', async t => {
+	const tempFile = tempy.file();
+	fs.writeFileSync(tempFile, JSON.stringify({foo: true}));
+	await writeJsonFile(tempFile, {bar: true});
+	t.is(fs.readFileSync(tempFile, 'utf8'), '{\n\t"bar": true\n}');
+});
+
+test('sync - respect EOF', t => {
+	const tempFile = tempy.file();
+	fs.writeFileSync(tempFile, JSON.stringify({foo: true}));
+	writeJsonFile.sync(tempFile, {bar: true});
+	t.is(fs.readFileSync(tempFile, 'utf8'), '{\n\t"bar": true\n}');
+});
