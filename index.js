@@ -10,10 +10,7 @@ const isPlainObj = require('is-plain-obj');
 
 const readFile = promisify(fs.readFile);
 
-const detectEOF = file => {
-	const detected = file.match(/\r?\n$/);
-	return detected ? detected[0] : '';
-};
+const hasTrailingNewline = file => /\n$/.test(file);
 
 const init = (fn, filePath, data, options) => {
 	if (!filePath) {
@@ -45,7 +42,9 @@ const main = async (filePath, data, options) => {
 	let EOF = '\n';
 	try {
 		const file = await readFile(filePath, 'utf8');
-		EOF = detectEOF(file);
+		if (!hasTrailingNewline(file)) {
+			EOF = '';
+		}
 		if (options.detectIndent) {
 			indent = detectIndent(file).indent;
 		}
@@ -65,7 +64,9 @@ const mainSync = (filePath, data, options) => {
 	let EOF = '\n';
 	try {
 		const file = fs.readFileSync(filePath, 'utf8');
-		EOF = detectEOF(file);
+		if (!hasTrailingNewline(file)) {
+			EOF = '';
+		}
 		if (options.detectIndent) {
 			indent = detectIndent(file).indent;
 		}
