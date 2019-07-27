@@ -62,14 +62,14 @@ test('sync - `replacer` option', t => {
 	t.is(fs.readFileSync(tempFile, 'utf8'), '{\n\t"foo": true\n}\n');
 });
 
-test('async - respect EOF', async t => {
+test('async - respect trailing new line at end of file', async t => {
 	const tempFile = tempy.file();
 	fs.writeFileSync(tempFile, JSON.stringify({foo: true}));
 	await writeJsonFile(tempFile, {bar: true});
 	t.is(fs.readFileSync(tempFile, 'utf8'), '{\n\t"bar": true\n}');
 });
 
-test('sync - respect EOF', t => {
+test('sync - respect trailing new line at end of file', t => {
 	const tempFile = tempy.file();
 	fs.writeFileSync(tempFile, JSON.stringify({foo: true}));
 	writeJsonFile.sync(tempFile, {bar: true});
