@@ -39,12 +39,13 @@ const init = (fn, filePath, data, options) => {
 
 const main = async (filePath, data, options) => {
 	let {indent} = options;
-	let EOF = '\n';
+	let trailingNewline = '\n';
 	try {
 		const file = await readFile(filePath, 'utf8');
 		if (!hasTrailingNewline(file)) {
-			EOF = '';
+			trailingNewline = '';
 		}
+
 		if (options.detectIndent) {
 			indent = detectIndent(file).indent;
 		}
@@ -56,17 +57,18 @@ const main = async (filePath, data, options) => {
 
 	const json = JSON.stringify(data, options.replacer, indent);
 
-	return writeFileAtomic(filePath, `${json}${EOF}`, {mode: options.mode});
+	return writeFileAtomic(filePath, `${json}${trailingNewline}`, {mode: options.mode});
 };
 
 const mainSync = (filePath, data, options) => {
 	let {indent} = options;
-	let EOF = '\n';
+	let trailingNewline = '\n';
 	try {
 		const file = fs.readFileSync(filePath, 'utf8');
 		if (!hasTrailingNewline(file)) {
-			EOF = '';
+			trailingNewline = '';
 		}
+
 		if (options.detectIndent) {
 			indent = detectIndent(file).indent;
 		}
@@ -78,7 +80,7 @@ const mainSync = (filePath, data, options) => {
 
 	const json = JSON.stringify(data, options.replacer, indent);
 
-	return writeFileAtomic.sync(filePath, `${json}${EOF}`, {mode: options.mode});
+	return writeFileAtomic.sync(filePath, `${json}${trailingNewline}`, {mode: options.mode});
 };
 
 module.exports = async (filePath, data, options) => {
