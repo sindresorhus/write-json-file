@@ -10,6 +10,8 @@ const isPlainObj = require('is-plain-obj');
 
 const readFile = promisify(fs.readFile);
 
+const hasTrailingNewline = file => /\n$/.test(file);
+
 const init = (fn, filePath, data, options) => {
 	if (!filePath) {
 		throw new TypeError('Expected a filepath');
@@ -37,40 +39,48 @@ const init = (fn, filePath, data, options) => {
 
 const main = async (filePath, data, options) => {
 	let {indent} = options;
+	let trailingNewline = '\n';
+	try {
+		const file = await readFile(filePath, 'utf8');
+		if (!hasTrailingNewline(file)) {
+			trailingNewline = '';
+		}
 
-	if (options.detectIndent) {
-		try {
-			const file = await readFile(filePath, 'utf8');
+		if (options.detectIndent) {
 			indent = detectIndent(file).indent;
-		} catch (error) {
-			if (error.code !== 'ENOENT') {
-				throw error;
-			}
+		}
+	} catch (error) {
+		if (error.code !== 'ENOENT') {
+			throw error;
 		}
 	}
 
 	const json = JSON.stringify(data, options.replacer, indent);
 
-	return writeFileAtomic(filePath, `${json}\n`, {mode: options.mode});
+	return writeFileAtomic(filePath, `${json}${trailingNewline}`, {mode: options.mode});
 };
 
 const mainSync = (filePath, data, options) => {
 	let {indent} = options;
+	let trailingNewline = '\n';
+	try {
+		const file = fs.readFileSync(filePath, 'utf8');
+		if (!hasTrailingNewline(file)) {
+			trailingNewline = '';
+		}
 
-	if (options.detectIndent) {
-		try {
-			const file = fs.readFileSync(filePath, 'utf8');
+		if (options.detectIndent) {
 			indent = detectIndent(file).indent;
-		} catch (error) {
-			if (error.code !== 'ENOENT') {
-				throw error;
-			}
+		}
+	} catch (error) {
+		if (error.code !== 'ENOENT') {
+			throw error;
 		}
 	}
 
 	const json = JSON.stringify(data, options.replacer, indent);
 
-	return writeFileAtomic.sync(filePath, `${json}\n`, {mode: options.mode});
+	return writeFileAtomic.sync(filePath, `${json}${trailingNewline}`, {mode: options.mode});
 };
 
 module.exports = async (filePath, data, options) => {
