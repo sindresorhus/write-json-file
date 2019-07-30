@@ -1,6 +1,6 @@
 {
 	"name": "write-json-file",
-	"version": "4.1.1",
+	"version": "4.2.0",
 	"description": "Stringify and write JSON to a file atomically",
 	"license": "MIT",
 	"repository": "sindresorhus/write-json-file",
