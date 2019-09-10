@@ -25,11 +25,11 @@ const writeJsonFile = require('write-json-file');
 
 ## API
 
-### writeJsonFile(filePath, data, [options])
+### writeJsonFile(filePath, data, options?)
 
 Returns a `Promise`.
 
-### writeJsonFile.sync(filePath, data, [options])
+### writeJsonFile.sync(filePath, data, options?)
 
 #### options
 
@@ -79,6 +79,14 @@ Default: `0o666`
 - [make-dir](https://github.com/sindresorhus/make-dir) - Make a directory and its parents if needed
 
 
-## License
+---
 
-MIT © [Sindre Sorhus](https://sindresorhus.com)
+<div align="center">
+	<b>
+		<a href="https://tidelift.com/subscription/pkg/npm-write-json-file?utm_source=npm-write-json-file&utm_medium=referral&utm_campaign=readme">Get professional support for this package with a Tidelift subscription</a>
+	</b>
+	<br>
+	<sub>
+		Tidelift helps make open source sustainable for maintainers while giving companies<br>assurances about security, maintenance, and licensing for their dependencies.
+	</sub>
+</div>
