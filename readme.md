@@ -2,7 +2,7 @@
 
 > Stringify and write JSON to a file [atomically](https://github.com/npm/write-file-atomic)
 
-Creates directories for you as needed.
+Creates directories for you as needed. Uses JSON.stringify, which can [run out of memory](https://github.com/nodejs/node/issues/13465). If the data you need to write is large, consider using a streaming JSON writer, such as @mbostock's [json-write](https://www.npmjs.com/package/json-write).
 
 
 ## Install
