@@ -73,20 +73,15 @@ Default: `0o666`
 [Mode](https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation) used when writing the file.
 
 
+## write-json-file for enterprise
+
+Available as part of the Tidelift Subscription.
+
+The maintainers of write-json-file and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/npm-write-json-file?utm_source=npm-write-json-file&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+
+
 ## Related
 
 - [load-json-file](https://github.com/sindresorhus/load-json-file) - Read and parse a JSON file
 - [make-dir](https://github.com/sindresorhus/make-dir) - Make a directory and its parents if needed
 
-
----
-
-<div align="center">
-	<b>
-		<a href="https://tidelift.com/subscription/pkg/npm-write-json-file?utm_source=npm-write-json-file&utm_medium=referral&utm_campaign=readme">Get professional support for this package with a Tidelift subscription</a>
-	</b>
-	<br>
-	<sub>
-		Tidelift helps make open source sustainable for maintainers while giving companies<br>assurances about security, maintenance, and licensing for their dependencies.
-	</sub>
-</div>
