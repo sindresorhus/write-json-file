@@ -21,11 +21,10 @@ const init = (fn, filePath, data, options) => {
 		throw new TypeError('Expected data to stringify');
 	}
 
-	options = {
+	options = Object.assign({
 		indent: '\t',
-		sortKeys: false,
-		...options
-	};
+		sortKeys: false
+	}, options);
 
 	if (options.sortKeys && isPlainObj(data)) {
 		data = sortKeys(data, {
