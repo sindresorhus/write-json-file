@@ -57,7 +57,7 @@ const main = async (filePath, data, options) => {
 
 	const json = JSON.stringify(data, options.replacer, indent);
 
-	return writeFileAtomic(filePath, `${json}${trailingNewline}`, {mode: options.mode, chown:false});
+	return writeFileAtomic(filePath, `${json}${trailingNewline}`, {mode: options.mode, chown: false});
 };
 
 const mainSync = (filePath, data, options) => {
@@ -80,7 +80,7 @@ const mainSync = (filePath, data, options) => {
 
 	const json = JSON.stringify(data, options.replacer, indent);
 
-	return writeFileAtomic.sync(filePath, `${json}${trailingNewline}`, {mode: options.mode, chown:false});
+	return writeFileAtomic.sync(filePath, `${json}${trailingNewline}`, {mode: options.mode, chown: false});
 };
 
 module.exports = async (filePath, data, options) => {
