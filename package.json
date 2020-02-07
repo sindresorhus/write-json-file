@@ -4,6 +4,7 @@
 	"description": "Stringify and write JSON to a file atomically",
 	"license": "MIT",
 	"repository": "sindresorhus/write-json-file",
+	"funding": "https://github.com/sponsors/sindresorhus",
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
@@ -38,13 +39,13 @@
 		"graceful-fs": "^4.1.15",
 		"is-plain-obj": "^2.0.0",
 		"make-dir": "^3.0.0",
-		"sort-keys": "^3.0.0",
+		"sort-keys": "^4.0.0",
 		"write-file-atomic": "^3.0.0"
 	},
 	"devDependencies": {
 		"ava": "^1.4.1",
 		"tempy": "^0.3.0",
-		"tsd": "^0.7.3",
-		"xo": "^0.24.0"
+		"tsd": "^0.8.0",
+		"xo": "^0.25.3"
 	}
 }

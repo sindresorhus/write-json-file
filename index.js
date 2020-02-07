@@ -10,8 +10,6 @@ const isPlainObj = require('is-plain-obj');
 
 const readFile = promisify(fs.readFile);
 
-const hasTrailingNewline = file => /\n$/.test(file);
-
 const init = (fn, filePath, data, options) => {
 	if (!filePath) {
 		throw new TypeError('Expected a filepath');
@@ -42,7 +40,7 @@ const main = async (filePath, data, options) => {
 	let trailingNewline = '\n';
 	try {
 		const file = await readFile(filePath, 'utf8');
-		if (!hasTrailingNewline(file)) {
+		if (!file.endsWith('\n')) {
 			trailingNewline = '';
 		}
 
@@ -65,7 +63,7 @@ const mainSync = (filePath, data, options) => {
 	let trailingNewline = '\n';
 	try {
 		const file = fs.readFileSync(filePath, 'utf8');
-		if (!hasTrailingNewline(file)) {
+		if (!file.endsWith('\n')) {
 			trailingNewline = '';
 		}
 
