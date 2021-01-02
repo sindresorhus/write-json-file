@@ -1,4 +1,4 @@
-# write-json-file [![Build Status](https://travis-ci.org/sindresorhus/write-json-file.svg?branch=master)](https://travis-ci.org/sindresorhus/write-json-file)
+# write-json-file
 
 > Stringify and write JSON to a file [atomically](https://github.com/npm/write-file-atomic)
 
