@@ -13,11 +13,9 @@ $ npm install write-json-file
 ## Usage
 
 ```js
-const writeJsonFile = require('write-json-file');
+import {writeJsonFile} from 'write-json-file';
 
-(async () => {
-	await writeJsonFile('foo.json', {foo: true});
-})();
+await writeJsonFile('foo.json', {foo: true});
 ```
 
 ## API
@@ -68,7 +66,7 @@ Passed into [`JSON.stringify`](https://developer.mozilla.org/en-US/docs/Web/Java
 Type: `number`\
 Default: `0o666`
 
-[Mode](https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation) used when writing the file.
+The [mode](https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation) used when writing the file.
 
 ## write-json-file for enterprise
 

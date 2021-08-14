@@ -1,81 +1,77 @@
-declare namespace writeJsonFile {
-	type Replacer = (this: unknown, key: string, value: any) => unknown;
-	type SortKeys = (a: string, b: string) => number;
+export type Replacer = (this: unknown, key: string, value: unknown) => unknown;
+export type SortKeys = (a: string, b: string) => number;
 
-	interface Options {
-		/**
-		Indentation as a string or number of spaces. Pass in `undefined` for no formatting.
+export interface Options {
+	/**
+	Indentation as a string or number of spaces.
 
-		@default '\t'
-		*/
-		readonly indent?: string | number | undefined;
+	Pass in `undefined` for no formatting.
 
-		/**
-		Detect indentation automatically if the file exists.
+	@default '\t'
+	*/
+	readonly indent?: string | number | undefined;
 
-		@default false
-		*/
-		readonly detectIndent?: boolean;
+	/**
+	Detect indentation automatically if the file exists.
 
-		/**
-		Sort the keys recursively. Optionally pass in a compare function.
+	@default false
+	*/
+	readonly detectIndent?: boolean;
 
-		@default false
-		*/
-		readonly sortKeys?: boolean | SortKeys;
+	/**
+	Sort the keys recursively.
 
-		/**
-		Passed into `JSON.stringify`.
-		*/
-		readonly replacer?: Replacer | ReadonlyArray<number | string>;
+	Optionally pass in a compare function.
 
-		/**
-		Mode used when writing the file.
+	@default false
+	*/
+	readonly sortKeys?: boolean | SortKeys;
 
-		@default 0o666
-		*/
-		readonly mode?: number;
-	}
+	/**
+	Passed into `JSON.stringify`.
+	*/
+	readonly replacer?: Replacer | ReadonlyArray<number | string>;
+
+	/**
+	The mode used when writing the file.
+
+	@default 0o666
+	*/
+	readonly mode?: number;
 }
 
-declare const writeJsonFile: {
-	/**
-	Stringify and write JSON to a file atomically.
+/**
+Stringify and write JSON to a file atomically.
 
-	Creates directories for you as needed.
+Creates directories for you as needed.
 
-	@example
-	```
-	import writeJsonFile = require('write-json-file');
+@example
+```
+import {writeJsonFile} from 'write-json-file';
 
-	(async () => {
-		await writeJsonFile('foo.json', {foo: true});
-	})();
-	```
-	*/
-	(
-		filePath: string,
-		data: unknown,
-		options?: writeJsonFile.Options
-	): Promise<void>;
+await writeJsonFile('foo.json', {foo: true});
+```
+*/
+export function writeJsonFile(
+	filePath: string,
+	data: unknown,
+	options?: Options
+): Promise<void>;
 
-	/**
-	Stringify and write JSON to a file atomically.
+/**
+Stringify and write JSON to a file atomically.
 
-	Creates directories for you as needed.
+Creates directories for you as needed.
 
-	@example
-	```
-	import writeJsonFile = require('write-json-file');
+@example
+```
+import {writeJsonFileSync} from 'write-json-file';
 
-	writeJsonFile.sync('foo.json', {foo: true});
-	```
-	*/
-	sync(
-		filePath: string,
-		data: unknown,
-		options?: writeJsonFile.Options
-	): void;
-};
-
-export = writeJsonFile;
+writeJsonFileSync('foo.json', {foo: true});
+```
+*/
+export function writeJsonFileSync(
+	filePath: string,
+	data: unknown,
+	options?: Options
+): void;

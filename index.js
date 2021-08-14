@@ -1,16 +1,11 @@
-'use strict';
-const {promisify} = require('util');
-const path = require('path');
-const fs = require('graceful-fs');
-const writeFileAtomic = require('write-file-atomic');
-const sortKeys = require('sort-keys');
-const makeDir = require('make-dir');
-const detectIndent = require('detect-indent');
-const isPlainObj = require('is-plain-obj');
+import path from 'node:path';
+import fs, {promises as fsPromises} from 'node:fs';
+import writeFileAtomic from 'write-file-atomic';
+import sortKeys from 'sort-keys';
+import detectIndent from 'detect-indent';
+import isPlainObj from 'is-plain-obj';
 
-const readFile = promisify(fs.readFile);
-
-const init = (fn, filePath, data, options) => {
+const init = (function_, filePath, data, options) => {
 	if (!filePath) {
 		throw new TypeError('Expected a filepath');
 	}
@@ -22,24 +17,24 @@ const init = (fn, filePath, data, options) => {
 	options = {
 		indent: '\t',
 		sortKeys: false,
-		...options
+		...options,
 	};
 
 	if (options.sortKeys && isPlainObj(data)) {
 		data = sortKeys(data, {
 			deep: true,
-			compare: typeof options.sortKeys === 'function' ? options.sortKeys : undefined
+			compare: typeof options.sortKeys === 'function' ? options.sortKeys : undefined,
 		});
 	}
 
-	return fn(filePath, data, options);
+	return function_(filePath, data, options);
 };
 
 const main = async (filePath, data, options) => {
 	let {indent} = options;
 	let trailingNewline = '\n';
 	try {
-		const file = await readFile(filePath, 'utf8');
+		const file = await fsPromises.readFile(filePath, 'utf8');
 		if (!file.endsWith('\n')) {
 			trailingNewline = '';
 		}
@@ -81,12 +76,12 @@ const mainSync = (filePath, data, options) => {
 	return writeFileAtomic.sync(filePath, `${json}${trailingNewline}`, {mode: options.mode, chown: false});
 };
 
-module.exports = async (filePath, data, options) => {
-	await makeDir(path.dirname(filePath), {fs});
-	return init(main, filePath, data, options);
-};
+export async function writeJsonFile(filePath, data, options) {
+	await fsPromises.mkdir(path.dirname(filePath), {recursive: true});
+	await init(main, filePath, data, options);
+}
 
-module.exports.sync = (filePath, data, options) => {
-	makeDir.sync(path.dirname(filePath), {fs});
+export function writeJsonFileSync(filePath, data, options) {
+	fs.mkdirSync(path.dirname(filePath), {recursive: true});
 	init(mainSync, filePath, data, options);
-};
+}

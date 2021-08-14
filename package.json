@@ -8,10 +8,12 @@
 	"author": {
 		"name": "Sindre Sorhus",
 		"email": "sindresorhus@gmail.com",
-		"url": "sindresorhus.com"
+		"url": "https://sindresorhus.com"
 	},
+	"type": "module",
+	"exports": "./index.js",
 	"engines": {
-		"node": ">=8.3"
+		"node": "^12.20.0 || ^14.13.1 || >=16.0.0"
 	},
 	"scripts": {
 		"test": "xo && ava && tsd"
@@ -35,17 +37,15 @@
 		"atomically"
 	],
 	"dependencies": {
-		"detect-indent": "^6.0.0",
-		"graceful-fs": "^4.1.15",
-		"is-plain-obj": "^2.0.0",
-		"make-dir": "^3.0.0",
-		"sort-keys": "^4.0.0",
-		"write-file-atomic": "^3.0.0"
+		"detect-indent": "^7.0.0",
+		"is-plain-obj": "^4.0.0",
+		"sort-keys": "^5.0.0",
+		"write-file-atomic": "^3.0.3"
 	},
 	"devDependencies": {
-		"ava": "^1.4.1",
-		"tempy": "^0.3.0",
-		"tsd": "^0.8.0",
-		"xo": "^0.25.3"
+		"ava": "^3.15.0",
+		"tempy": "^1.0.1",
+		"tsd": "^0.17.0",
+		"xo": "^0.44.0"
 	}
 }
