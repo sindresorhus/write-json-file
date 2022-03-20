@@ -7,6 +7,8 @@ export interface Options {
 
 	Pass in `undefined` for no formatting.
 
+	If you set both this and `detectIndent`, this value will be used when the indentation cannot be detected.
+
 	@default '\t'
 	*/
 	readonly indent?: string | number | undefined;

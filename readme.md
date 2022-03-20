@@ -32,12 +32,14 @@ Type: `object`
 
 ##### indent
 
-Type: `string | number`\
+Type: `string | number | undefined`\
 Default: `'\t'`
 
 Indentation as a string or number of spaces.
 
 Pass in `undefined` for no formatting.
+
+If you set both this and `detectIndent`, this value will be used when the indentation cannot be detected.
 
 ##### detectIndent
 
