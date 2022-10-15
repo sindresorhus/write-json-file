@@ -24,7 +24,7 @@ await writeJsonFile('foo.json', {foo: true});
 
 Returns a `Promise`.
 
-### writeJsonFile.sync(filePath, data, options?)
+### writeJsonFileSync(filePath, data, options?)
 
 #### options
 
