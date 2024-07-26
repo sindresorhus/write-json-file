@@ -1,5 +1,10 @@
 import {expectType, expectAssignable} from 'tsd';
-import {writeJsonFile, writeJsonFileSync, Replacer, SortKeys} from './index.js';
+import {
+	writeJsonFile,
+	writeJsonFileSync,
+	type Replacer,
+	type SortKeys,
+} from './index.js';
 
 expectAssignable<SortKeys>(() => 1);
 expectAssignable<SortKeys>((a: string) => a.length);

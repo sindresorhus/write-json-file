@@ -1,7 +1,7 @@
 export type Replacer = (this: unknown, key: string, value: unknown) => unknown;
 export type SortKeys = (a: string, b: string) => number;
 
-export interface Options {
+export type Options = {
 	/**
 	Indentation as a string or number of spaces.
 
@@ -40,7 +40,7 @@ export interface Options {
 	@default 0o666
 	*/
 	readonly mode?: number;
-}
+};
 
 /**
 Stringify and write JSON to a file atomically.
