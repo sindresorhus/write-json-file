@@ -17,10 +17,10 @@
 	},
 	"sideEffects": false,
 	"engines": {
-		"node": ">=18"
+		"node": ">=20"
 	},
 	"scripts": {
-		"test": "xo && ava && tsd"
+		"test": "xo && node test.js && tsd"
 	},
 	"files": [
 		"index.js",
@@ -43,13 +43,11 @@
 	"dependencies": {
 		"detect-indent": "^7.0.1",
 		"is-plain-obj": "^4.1.0",
-		"sort-keys": "^5.0.0",
-		"write-file-atomic": "^5.0.1"
+		"sort-keys": "^6.0.0",
+		"write-file-atomic": "^6.0.0"
 	},
 	"devDependencies": {
-		"ava": "^6.1.3",
-		"tempy": "^2.0.0",
-		"tsd": "^0.31.1",
-		"xo": "^0.59.2"
+		"tsd": "^0.33.0",
+		"xo": "^1.2.2"
 	}
 }
